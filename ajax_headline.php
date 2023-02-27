@@ -18,7 +18,7 @@ if(isset($_GET["h"])){$myTest = $_GET["h"];}else{$myTest = "";}
 
 if($myTest == "yes")
 {//get headline!
-	$aHeadline = array();
+	$quotes = array();
     $quotes[0] = "If you don't have time to read, you don't have the time (or the tools) to write. Simple as that.--Stephen King";
     $quotes[1] = "Inspiration does exist, but it must find you working.";
     $quotes[2] = "We write to taste life twice, in the moment and in retrospect. --Anaïs Nin";
@@ -31,7 +31,7 @@ if($myTest == "yes")
     $quotes[9] = "I write to discover what I know.--Flannery O'Connor";
 	srand(time());
 	$random = (rand()%9);
-	print $aHeadline[$random];
+	print $quotes[$random];
 }else{
 	print "This is an AJAX page, and you didn't say the magic word!";	
 }	
