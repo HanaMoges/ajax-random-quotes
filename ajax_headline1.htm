@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ajax_headline1.htm</title>
+    
+<script type="text/javascript">
+var xmlHttp;
+
+function createXMLHttpRequest() {
+    if (window.ActiveXObject) {
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    } 
+    else if (window.XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest();
+    }
+}
+    
+function startRequest() {
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleStateChange;
+    url = "ajax_headline.php?h=yes" + "&ts=" + new Date().getTime();
+    xmlHttp.open("GET",url, true);
+    xmlHttp.send(null);
+}
+    
+function handleStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+            alert("Headline: " + xmlHttp.responseText);
+        }
+    }
+}
+</script>
+</head>
+
+<body>
+<h1 align="center">ajax_headline1.htm</h1>
+<p>Click to get random headline from server via XMLHTTPRequest Object (AJAX)</p>
+<p>This page contacts a PHP page named ajax_headline.php to retrieve a random headline.</p>
+    <form action="#">
+        <input type="button" value="Click To Get Headline From Server" onclick="startRequest();"/>
+    </form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ajax_test.htm</title>
+    
+<script type="text/javascript">
+var xmlHttp; //create xmlHttp variable outside function for global access
+
+function createXMLHttpRequest() {
+    if (window.ActiveXObject) {//Microsoft browser
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    } 
+    else if (window.XMLHttpRequest) { //FF, etc. version of AJAX object
+        xmlHttp = new XMLHttpRequest();
+    }
+}
+    
+function startRequest() {
+    createXMLHttpRequest(); //create AJAX object
+    xmlHttp.onreadystatechange = handleStateChange;  //assign function for response
+    url = "ajax_test.php?" + "ts=" + new Date().getTime();  //prepare URL of request
+    xmlHttp.open("GET",url, true);  //prepare transmission to URL, identify as "GET" method, Async (true)
+    xmlHttp.send(null);  //send data to server
+}
+    
+function handleStateChange() {
+    if(xmlHttp.readyState == 4) {  //response data is ready
+        if(xmlHttp.status == 200) {  //data returned is not an error
+        
+        	//output data as text
+            alert("Test Data Returned: " + xmlHttp.responseText);
+        }
+    }
+}
+</script>
+</head>
+
+<body>
+<h1 align="center">ajax_test.htm</h1>
+<p>Click to get random number from server via XMLHTTPRequest Object (AJAX)</p>
+<p>This page contacts a PHP page named ajax_test.php to retrieve a random number.</p>
+    <form action="#">
+        <input type="button" value="Click To Get a number From the Server" onclick="startRequest();"/>
+    </form>
+</body>
+</html>
